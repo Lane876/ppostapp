@@ -1,12 +1,15 @@
 import React from "react";
 import { TextField, makeStyles, Button } from "@material-ui/core";
 import useForms from "./useForms";
+import { create } from "../actions/postMessage";
+import { useDispatch } from "react-redux";
+import ButterToast, { Cinnamon } from "butter-toast";
+import { AssignmentTurnedIn } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     "& .MuiTextField-root": {
       marginBottom: theme.spacing(1),
-      // width: 200,
     },
   },
   form: {
@@ -23,6 +26,7 @@ const initialFormValues = {
 
 const PostMessagesFrom = () => {
   const classes = useStyles();
+  const dispatch = useDispatch();
 
   const { values, setValues, handleInputChange, errors, setErrors } = useForms(
     initialFormValues
@@ -40,10 +44,30 @@ const PostMessagesFrom = () => {
 
   function handleSubmit(e) {
     e.preventDefault();
-    if (validate()) {
-      window.alert("Validation succeeded");
+
+    function callback() {
+      ButterToast.raise({
+        content: (
+          <Cinnamon.Crisp
+            title="Post Box"
+            content="Submited successfully"
+            scheme={Cinnamon.Crisp.SCHEME_PURPLE}
+            icon={<AssignmentTurnedIn />}
+          />
+        ),
+      });
     }
-    setValues(initialFormValues);
+
+    // const onSuccess = () => {
+    //   window.alert("Submited successfuly");
+    // };
+    if (validate()) {
+      dispatch(create(values));
+    }
+    callback();
+    setTimeout(() => {
+      window.location.reload();
+    }, 1500);
   }
 
   return (
@@ -80,6 +104,7 @@ const PostMessagesFrom = () => {
         size="large"
         type="submit"
         fullWidth
+        // onClick={() => dispatch(create())}
       >
         Submit
       </Button>

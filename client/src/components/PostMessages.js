@@ -10,6 +10,7 @@ import {
   ListItemText,
   Typography,
   Divider,
+  Button,
 } from "@material-ui/core";
 import PostMessagesForm from "./PostMessagesFrom";
 
@@ -17,6 +18,9 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     margin: theme.spacing(3),
     padding: theme.spacing(2),
+  },
+  btn: {
+    margin: theme.spacing(1),
   },
 }));
 
@@ -46,6 +50,24 @@ const PostMessages = () => {
                   <ListItemText>
                     <Typography variant="h5">{item.title}</Typography>
                     <div>{item.message}</div>
+                    <div style={{ textAlign: "center" }}>
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        size="small"
+                        className={classes.btn}
+                      >
+                        Edit
+                      </Button>
+                      <Button
+                        variant="contained"
+                        color="secondary"
+                        size="small"
+                        className={classes.btn}
+                      >
+                        Delete
+                      </Button>
+                    </div>
                   </ListItemText>
                 </ListItem>
                 <Divider compnent="li" />
