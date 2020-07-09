@@ -49,7 +49,7 @@ const PostMessages = () => {
                 <ListItem>
                   <ListItemText>
                     <Typography variant="h5">{item.title}</Typography>
-                    <div>{item.message}</div>
+                    <div style={{ wordWrap: "break-word" }}>{item.message}</div>
                     <div style={{ textAlign: "center" }}>
                       <Button
                         variant="contained"
